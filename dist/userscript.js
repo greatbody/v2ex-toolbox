@@ -51,6 +51,7 @@ var AtPeople = function AtPeople() {
   var _this = this;
 
   classCallCheck(this, AtPeople);
+  this.managerTeam = '@Livid @Kai @Olivia @GordianZ @sparanoid ';
 
   this.getAllInPage = function () {
     var ownerName = document.querySelector('.header .gray a').innerHTML;
@@ -63,12 +64,21 @@ var AtPeople = function AtPeople() {
     }).join(' ');
   };
 
-  this.addButton = function () {
+  this.addButtons = function () {
+    var aAtAll = _this.createAtAllButton();
+    var aAtManagerTeam = _this.createAtManagerTeamButton();
+    var form = document.querySelector('#Main .box form');
+    form.appendChild(aAtAll);
+    form.appendChild(aAtManagerTeam);
+  };
+
+  this.createAtAllButton = function () {
     var aAtAll = document.createElement('a');
     // eslint-disable-next-line no-script-url
     aAtAll.href = 'javascript:void(0);';
     aAtAll.innerText = '@所有人';
     aAtAll.style.cursor = 'pointer;';
+    aAtAll.style.marginLeft = '10px';
     aAtAll.onclick = function () {
       var allInPage = _this.getAllInPage() + ' ';
       var textarea = document.querySelector('#reply_content');
@@ -81,12 +91,31 @@ var AtPeople = function AtPeople() {
         textarea.focus();
       }, 1);
     };
-    var form = document.querySelector('#Main .box form');
-    form.innerHTML += '&nbsp;&nbsp;&nbsp;&nbsp;';
-    form.appendChild(aAtAll);
+    return aAtAll;
   };
 
-  this.addButton();
+  this.createAtManagerTeamButton = function () {
+    var aAtManagerTeam = document.createElement('a');
+    // eslint-disable-next-line no-script-url
+    aAtManagerTeam.href = 'javascript:void(0);';
+    aAtManagerTeam.innerText = '@管理员';
+    aAtManagerTeam.style.cursor = 'pointer;';
+    aAtManagerTeam.style.marginLeft = '10px';
+    aAtManagerTeam.onclick = function () {
+      var textarea = document.querySelector('#reply_content');
+      if (textarea.value.length > 0) {
+        textarea.value += '\n' + _this.managerTeam;
+      } else {
+        textarea.value = _this.managerTeam;
+      }
+      setTimeout(function () {
+        textarea.focus();
+      }, 1);
+    };
+    return aAtManagerTeam;
+  };
+
+  this.addButtons();
 };
 
 AtPeople.new = function () {
