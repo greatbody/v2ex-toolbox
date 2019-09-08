@@ -24,7 +24,9 @@ export default {
       '// @grant       GM_setValue\n' +
       '// @grant       GM_deleteValue\n' +
       '// @grant       GM_listValues\n' +
-      '// ==/UserScript==\n'
+      '// ==/UserScript==\n' +
+      '// Refs:' +
+      '// https://greasyfork.org/en/scripts/3452-v2ex%E5%A2%9E%E5%BC%BA%E6%8F%92%E4%BB%B6'
   },
   plugins: [
     replace({

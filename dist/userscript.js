@@ -13,7 +13,7 @@
 // @grant       GM_deleteValue
 // @grant       GM_listValues
 // ==/UserScript==
-
+// Refs:// https://greasyfork.org/en/scripts/3452-v2ex%E5%A2%9E%E5%BC%BA%E6%8F%92%E4%BB%B6
 'use strict';
 
 var classCallCheck = function (instance, Constructor) {
@@ -22,11 +22,29 @@ var classCallCheck = function (instance, Constructor) {
   }
 };
 
+var MarkBuildingOwner = function MarkBuildingOwner() {
+  classCallCheck(this, MarkBuildingOwner);
+};
+
+MarkBuildingOwner.markOwner = function () {
+  var ownerHtml = ' <font color=green>[楼主]</font>';
+  var ownerName = document.querySelector('.header .gray a').innerHTML;
+  var ownerLinks = document.querySelectorAll('#Main .box .dark');
+  for (var i = 0; i < ownerLinks.length; i += 1) {
+    if (ownerLinks[i].innerHTML === ownerName) {
+      ownerLinks[i].innerHTML += ownerHtml;
+    }
+  }
+};
+
+// hello world
+
 var Runner = function Runner() {
   classCallCheck(this, Runner);
 
   this.run = function () {
     console.log('Hello, this is V2EX tool');
+    MarkBuildingOwner.markOwner();
   };
 };
 

@@ -1,6 +1,11 @@
+// hello world
+import MarkBuildingOwner from './functions/MarkBuildingOwner';
+
+
 class Runner {
   run = () => {
-    console.log('Hello, this is V2EX tool')
+    console.log('Hello, this is V2EX tool');
+    MarkBuildingOwner.markOwner();
   }
 }
 
