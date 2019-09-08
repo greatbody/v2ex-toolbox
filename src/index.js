@@ -1,11 +1,11 @@
-// hello world
 import MarkBuildingOwner from './functions/MarkBuildingOwner';
-
+import AtPeople from './functions/AtPeople';
 
 class Runner {
   run = () => {
     console.log('Hello, this is V2EX tool');
     MarkBuildingOwner.markOwner();
+    AtPeople.new();
   }
 }
 

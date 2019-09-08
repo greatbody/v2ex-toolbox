@@ -22,6 +22,16 @@ var classCallCheck = function (instance, Constructor) {
   }
 };
 
+var toConsumableArray = function (arr) {
+  if (Array.isArray(arr)) {
+    for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) arr2[i] = arr[i];
+
+    return arr2;
+  } else {
+    return Array.from(arr);
+  }
+};
+
 var MarkBuildingOwner = function MarkBuildingOwner() {
   classCallCheck(this, MarkBuildingOwner);
 };
@@ -37,7 +47,51 @@ MarkBuildingOwner.markOwner = function () {
   }
 };
 
-// hello world
+var AtPeople = function AtPeople() {
+  var _this = this;
+
+  classCallCheck(this, AtPeople);
+
+  this.getAllInPage = function () {
+    var ownerName = document.querySelector('.header .gray a').innerHTML;
+    return [].concat(toConsumableArray(document.querySelectorAll('#Main .box .dark'))).map(function (link) {
+      return link.innerHTML;
+    }).filter(function (userName) {
+      return userName.indexOf(ownerName) === -1;
+    }).map(function (userName) {
+      return '@' + userName;
+    }).join(' ');
+  };
+
+  this.addButton = function () {
+    var aAtAll = document.createElement('a');
+    // eslint-disable-next-line no-script-url
+    aAtAll.href = 'javascript:void(0);';
+    aAtAll.innerText = '@所有人';
+    aAtAll.style.cursor = 'pointer;';
+    aAtAll.onclick = function () {
+      var allInPage = _this.getAllInPage() + ' ';
+      var textarea = document.querySelector('#reply_content');
+      if (textarea.value.length > 0) {
+        textarea.value += '\n' + allInPage;
+      } else {
+        textarea.value = allInPage;
+      }
+      setTimeout(function () {
+        textarea.focus();
+      }, 1);
+    };
+    var form = document.querySelector('#Main .box form');
+    form.innerHTML += '&nbsp;&nbsp;&nbsp;&nbsp;';
+    form.appendChild(aAtAll);
+  };
+
+  this.addButton();
+};
+
+AtPeople.new = function () {
+  return new AtPeople();
+};
 
 var Runner = function Runner() {
   classCallCheck(this, Runner);
@@ -45,6 +99,7 @@ var Runner = function Runner() {
   this.run = function () {
     console.log('Hello, this is V2EX tool');
     MarkBuildingOwner.markOwner();
+    AtPeople.new();
   };
 };
 
