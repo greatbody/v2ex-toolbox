@@ -26,7 +26,7 @@ export default {
       '// @grant       GM_listValues\n' +
       '// ==/UserScript==\n' +
       '// Refs:' +
-      '// https://greasyfork.org/en/scripts/3452-v2ex%E5%A2%9E%E5%BC%BA%E6%8F%92%E4%BB%B6'
+      '// https://greasyfork.org/en/scripts/3452-v2ex增强插件'
   },
   plugins: [
     replace({
